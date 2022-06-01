@@ -64,20 +64,26 @@ let playRound = (playerSelection, computerSelection) => {
     }
 }
 
-for (let i = 0; i < 5; i++) {
-    let computerSelection = computerPlay()
-    let playerSelection = prompt().toLowerCase()
-    console.log(playRound(playerSelection, computerSelection))
-    console.log(computerScore)
-    console.log(playerScore)
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let computerSelection = computerPlay()
+        let playerSelection = prompt().toLowerCase()
+        console.log(playRound(playerSelection, computerSelection))
+        console.log(computerScore)
+        console.log(playerScore)
+    }
+    whoIsWinner()
+    computerScore = playerScore = 0
 }
 
-if (computerScore == playerScore) {
-    console.log("Draw!")
-}
-else if (computerScore > playerScore) {
-    console.log("You Lose! Computer have more scores!")
-}
-else {
-    console.log("You are a winner!")
+function whoIsWinner() {
+    if (computerScore == playerScore) {
+        console.log("Draw!")
+    }
+    else if (computerScore > playerScore) {
+        console.log("You Lose! Computer have more scores!")
+    }
+    else {
+        console.log("You are a winner!")
+    }
 }
