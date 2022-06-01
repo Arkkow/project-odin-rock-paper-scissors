@@ -7,38 +7,77 @@ let choices = [
 
 let computerPlay = () => choices[Math.floor(Math.random() * choices.length)];
 
-const computerSelection = computerPlay();
-const playerSelection = prompt().toLowerCase();
+let playerScore = 0;
+let computerScore = 0;
 
-let playRound = (playerSelection, computerSelection) => {
+let rockCase = (playerSelection, computerSelection) => {
     if (playerSelection == "rock" && computerSelection == "rock") {
         return "Draw!"
     }
     else if (playerSelection == "rock" && computerSelection == "paper") {
+        computerScore += 1;
         return "You Lose! Paper beats Rock"
     }
-    else if (playerSelection == "rock" && computerSelection == "scissors") {
+    else {
+        playerScore += 1;
         return "You Win! Rock beats Scissors!"
     }
-    else if (playerSelection == "paper" && computerSelection == "rock") {
+}
+
+let paperCase = (playerSelection, computerSelection) => {
+    if (playerSelection == "paper" && computerSelection == "rock") {
+        playerScore += 1;
         return "You Win! Rock beats Paper!"
     }
     else if (playerSelection == "paper" && computerSelection == "paper") {
         return "Draw!"
     }
-    else if (playerSelection == "paper" && computerSelection == "scissors") {
+    else {
+        computerScore += 1;
         return "You Lose! Scissors beats Paper!"
     }
-    else if (playerSelection == "scissors" && computerSelection == "rock") {
+}
+
+let scissorsCase = (playerSelection, computerSelection) => {
+    if (playerSelection == "scissors" && computerSelection == "rock") {
+        computerScore += 1;
         return "You Lose! Rock beats Scissors!"
     }
     else if (playerSelection == "scissors" && computerSelection == "paper") {
+        playerScore += 1;
         return "You Win! Scissors beats Paper!"
     }
-    else if (playerSelection == "scissors" && computerSelection == "scissors") {
+    else {
         return "Draw!"
     }
 }
 
-console.log(playRound(playerSelection, computerSelection))
+let playRound = (playerSelection, computerSelection) => {
+    if (playerSelection == "rock") {
+        return rockCase(playerSelection, computerSelection)
+    }
+    else if (playerSelection == "paper") {
+        return paperCase(playerSelection, computerSelection)
+    }
+    else {
+        return scissorsCase(playerSelection, computerSelection)
+    }
+}
 
+for (let i = 0; i < 5; i++) {
+    let computerSelection = computerPlay()
+    let playerSelection = prompt().toLowerCase()
+    console.log(playRound(playerSelection, computerSelection))
+    console.log(computerScore)
+    console.log(playerScore)
+}
+
+if (computerScore == playerScore) {
+    console.log("Draw!")
+}
+else if (computerScore > playerScore) {
+    console.log("You Lose! Computer have more scores!")
+}
+else {
+    console.log("You are a winner!")
+}
